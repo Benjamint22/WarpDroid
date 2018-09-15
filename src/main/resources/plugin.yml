@@ -1,0 +1,49 @@
+name: WarpDroid
+version: ${project.version}
+main: com.benjamintaillon.warpdroid.WarpDroid
+
+commands:
+    back:
+        description: Teleports you to the location where you died.
+        usage: /back
+        permission: warpdroid.back
+    callpets:
+        description: Teleports your pets back to you.
+        usage: /callpets
+        aliases: [callpet, tppets, tppet, teleportpets, teleportpet]
+        permission: warpdroid.callpets
+    home:
+        description: Teleports you to your home warp.
+        usage: /home
+        aliases: [house]
+        permission: warpdroid.home
+    sethome:
+        description: Move your home warp to your location.
+        usage: /sethome
+        aliases: [homeset, sethouse, houseset]
+        permission: warpdroid.sethome
+    warp:
+        description: Warps to the specified warp. If no warp is given, calls the warplist command.
+        usage: /warp <warpname>
+        aliases: warps
+        permission: warpdroid.warp
+    warplist:
+        description: Lists warps.
+        usage: /warplist
+        aliases: [listwarp, warpls, lswarp]
+        permission: warpdroid.list
+    addwarp:
+        description: Creates a warp at your location.
+        usage: /addwarp <warpname>
+        aliases: [createwarp, addwarp, warpcreate, warpadd]
+        permission: warpdroid.add
+    setwarp:
+        description: Move the specified warp to your location.
+        usage: /setwarp <warpname>
+        aliases: [warpset, movewarp, warpmove]
+        permission: warpdroid.set
+    removewarp:
+        description: Removes a warp.
+        usage: /removewarp <warpname>
+        aliases: [warpremove, deletewarp, warpdelete, delwarp, warpdel, rmwarp, warprm]
+        permission: warpdroid.remove

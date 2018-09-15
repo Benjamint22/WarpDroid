@@ -9,10 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Tameable;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -27,12 +24,12 @@ import java.util.*;
 
 public final class WarpDroid extends JavaPlugin implements Listener {
 
-    private List<Tameable> getPets(Player player) {
+    private List<Tameable> getPets(Player player, Class classMatch) {
         List<Tameable> pets = new ArrayList<>();
         Tameable tameable;
         for (World world : getServer().getWorlds()) {
             for (LivingEntity ent : world.getLivingEntities()) {
-                if (ent instanceof Tameable) {
+                if (ent instanceof Tameable && classMatch.isInstance(ent)) {
                     tameable = (Tameable)ent;
                     if (tameable.isTamed() && tameable.getOwner().getUniqueId() == player.getUniqueId()) {
                         pets.add(tameable);
@@ -91,10 +88,78 @@ public final class WarpDroid extends JavaPlugin implements Listener {
                     sender.sendMessage("This command can only be executed by a player.");
                 }
                 return true;
-            case "CALLPETS":
+            case "CALL":
+                if (sender instanceof Player) {
+                    if (args.length < 1) {
+                        return false;
+                    }
+                    Player player = (Player) sender;
+                    List<Tameable> pets = getPets(player, Tameable.class);
+                    for (int i = pets.size() - 1; i >= 0; i--) {
+                        if (pets.get(i).getCustomName() == null || !pets.get(i).getCustomName().toUpperCase().startsWith(args[0].toUpperCase())) {
+                            pets.remove(i);
+                        }
+                    }
+                    for (Tameable pet : pets) {
+                        pet.teleport(player.getLocation());
+                    }
+                    sender.sendMessage(String.format("Teleported %s pets to your location.", pets.size()));
+                } else {
+                    sender.sendMessage("This command can only be executed by a player.");
+                }
+                return true;
+            case "CALLANIMALS":
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
-                    List<Tameable> pets = getPets(player);
+                    List<Tameable> pets = getPets(player, Tameable.class);
+                    for (Tameable pet : pets) {
+                        pet.teleport(player.getLocation());
+                    }
+                    sender.sendMessage(String.format("Teleported %s pets to your location.", pets.size()));
+                } else {
+                    sender.sendMessage("This command can only be executed by a player.");
+                }
+                return true;
+            case "CALLHORSES":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    List<Tameable> pets = getPets(player, AbstractHorse.class);
+                    for (Tameable pet : pets) {
+                        pet.teleport(player.getLocation());
+                    }
+                    sender.sendMessage(String.format("Teleported %s pets to your location.", pets.size()));
+                } else {
+                    sender.sendMessage("This command can only be executed by a player.");
+                }
+                return true;
+            case "CALLDOGS":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    List<Tameable> pets = getPets(player, Wolf.class);
+                    for (Tameable pet : pets) {
+                        pet.teleport(player.getLocation());
+                    }
+                    sender.sendMessage(String.format("Teleported %s pets to your location.", pets.size()));
+                } else {
+                    sender.sendMessage("This command can only be executed by a player.");
+                }
+                return true;
+            case "CALLCATS":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    List<Tameable> pets = getPets(player, Ocelot.class);
+                    for (Tameable pet : pets) {
+                        pet.teleport(player.getLocation());
+                    }
+                    sender.sendMessage(String.format("Teleported %s pets to your location.", pets.size()));
+                } else {
+                    sender.sendMessage("This command can only be executed by a player.");
+                }
+                return true;
+            case "CALLBIRDS":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    List<Tameable> pets = getPets(player, Parrot.class);
                     for (Tameable pet : pets) {
                         pet.teleport(player.getLocation());
                     }

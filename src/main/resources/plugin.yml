@@ -7,11 +7,39 @@ commands:
         description: Teleports you to the location where you died.
         usage: /back
         permission: warpdroid.back
+    call:
+        description: Call one of your animals to you.
+        usage: /call <petname>
+        aliases: [callpet]
+        permission: warpdroid.call
+    callanimals:
+        description: Teleports your tamed pets and animals to you.
+        usage: /callanimals
+        aliases: [callall]
+        permission: warpdroid.call
     callpets:
         description: Teleports your pets back to you.
         usage: /callpets
-        aliases: [callpet, tppets, tppet, teleportpets, teleportpet]
-        permission: warpdroid.callpets
+        permission: warpdroid.call
+    callhorses:
+        description: Teleports your hores, mules and donkeys to you.
+        usage: /callhorses
+        aliases: [callmules, calldonkeys, callequines, callequidaes]
+        permission: warpdroid.call
+    calldogs:
+        description: Teleports your dogs to you.
+        usage: /calldogs
+        aliases: [callwolves, callwolfs]
+        permission: warpdroid.call
+    callcats:
+        Description: Teleports your cats to you.
+        usage: /callcats
+        aliases: [callocelots]
+        permission: warpdroid.call
+    callbirds:
+        Description: Teleports your birds to you.
+        usage: /callbirds
+        permission: warpdroid.call
     home:
         description: Teleports you to your home warp.
         usage: /home

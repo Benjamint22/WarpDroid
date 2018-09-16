@@ -31,7 +31,7 @@ public final class WarpDroid extends JavaPlugin implements Listener {
             for (LivingEntity ent : world.getLivingEntities()) {
                 if (ent instanceof Tameable && classMatch.isInstance(ent)) {
                     tameable = (Tameable)ent;
-                    if (tameable.isTamed() && tameable.getOwner().getUniqueId() == player.getUniqueId()) {
+                    if (tameable.isTamed() && tameable.getOwner() != null && tameable.getOwner().getUniqueId() == player.getUniqueId()) {
                         pets.add(tameable);
                     }
                 }
